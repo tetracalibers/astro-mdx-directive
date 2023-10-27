@@ -29,3 +29,7 @@ export type DirectiveComponentList = {
   leaf?: DirectiveComponent[]
   text?: DirectiveComponent[]
 }
+
+export const getComponentsFromConfig = (config: DirectiveComponentList) => {
+  return Object.values(config).flat()
+}

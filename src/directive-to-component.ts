@@ -1,7 +1,6 @@
 import { h } from 'hastscript'
 import { visit } from 'unist-util-visit'
 import { makeComponentNode } from './utils/mdx.js'
-import { getAutoImportedName } from './auto-import.js'
 import type {
   DirectiveComponent,
   DirectiveComponentList,
@@ -94,7 +93,12 @@ const parseUseAsProps = (
   return props
 }
 
-export const initDirectives = (components: DirectiveComponentList) => {
+export interface InitConfig {
+  directives: DirectiveComponentList
+  importedNameMap: Record<string, string>
+}
+
+export const initDirectives = ({ directives, importedNameMap }: InitConfig) => {
   return function remarkDirectiveToComponent() {
     return function (tree: Root) {
       visit(tree, function (_node, index, parent) {
@@ -106,7 +110,7 @@ export const initDirectives = (components: DirectiveComponentList) => {
 
         const directiveType = removeStart(node.type, 'Directive')
 
-        const thisDirectiveComponents = components[directiveType]
+        const thisDirectiveComponents = directives[directiveType]
         if (!thisDirectiveComponents) return
 
         const component = thisDirectiveComponents.find(
@@ -121,7 +125,7 @@ export const initDirectives = (components: DirectiveComponentList) => {
           // @ts-ignore
           parent.children[index] = makeComponentNode({
             ...node,
-            name: getAutoImportedName(node.name),
+            name: importedNameMap[node.name],
             attributes: { ...node.attributes, ...props },
           })
         } else {

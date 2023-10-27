@@ -1,19 +1,36 @@
-import { DirectiveComponentList } from './config-schema.js'
+import path from 'node:path'
+import { DirectiveComponent } from './config-schema.js'
+import { toPascalCase } from './utils/string.js'
 
-export const getAutoImportedName = (name: string | string[]) => {
-  const prefix = 'AutoImported__'
-  return Array.isArray(name) ? prefix + name.join('_') : prefix + name
+const getAutoImportedName = (pathname: string) => {
+  const name = path.basename(pathname, '.astro')
+  return `AutoImported_${toPascalCase(name)}`
 }
 
-export const getAutoImportList = (components: DirectiveComponentList) => {
-  return Object.values(components)
-    .flat()
-    .reduce((acc, component) => {
+export const getAutoImportedNameMap = (
+  components: DirectiveComponent[]
+): Record<string, string> => {
+  return components.reduce((acc, component) => {
+    const importedName = getAutoImportedName(component.path)
+
+    const curr = [component.name].flat().reduce((acc, name) => {
       return {
         ...acc,
-        [`./${component.path}`]: [
-          ['default', getAutoImportedName(component.name)],
-        ],
+        [name]: importedName,
       }
     }, {})
+
+    return { ...acc, ...curr }
+  }, {})
+}
+
+export const getAutoImportList = (components: DirectiveComponent[]) => {
+  return components.reduce((acc, component) => {
+    return {
+      ...acc,
+      [`./${component.path}`]: [
+        ['default', getAutoImportedName(component.path)],
+      ],
+    }
+  }, {})
 }

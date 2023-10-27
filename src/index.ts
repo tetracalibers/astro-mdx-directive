@@ -1,16 +1,19 @@
 import type { AstroIntegration } from 'astro'
 import AutoImport from 'astro-auto-import'
 import remarkMdxDirective from './lib/remark-mdx-directive.js'
-import { initDirectives } from './directive-to-component.js'
-import { getAutoImportList } from './auto-import.js'
-import type { DirectiveComponentList } from './config-schema.js'
+import { InitConfig, initDirectives } from './directive-to-component.js'
+import { getAutoImportList, getAutoImportedNameMap } from './auto-import.js'
+import {
+  getComponentsFromConfig,
+  type DirectiveComponentList,
+} from './config-schema.js'
 
 interface Options {
   directives: DirectiveComponentList
 }
 
-function registComponentDirective({ directives }: Options): AstroIntegration {
-  const remarkDirectiveToComponent = initDirectives(directives)
+function registComponentDirective(initConfig: InitConfig): AstroIntegration {
+  const remarkDirectiveToComponent = initDirectives(initConfig)
   return {
     name: 'astro-mdx-directive',
     hooks: {
@@ -26,9 +29,12 @@ function registComponentDirective({ directives }: Options): AstroIntegration {
 }
 
 export default function useComponentDirective(options: Options) {
+  const { directives } = options
+  const components = getComponentsFromConfig(directives)
+  const importedNameMap = getAutoImportedNameMap(components)
   return [
-    AutoImport({ imports: [getAutoImportList(options.directives)] }),
-    registComponentDirective(options),
+    AutoImport({ imports: [getAutoImportList(components)] }),
+    registComponentDirective({ directives, importedNameMap }),
   ]
 }
 
