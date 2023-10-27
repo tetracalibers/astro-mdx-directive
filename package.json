@@ -34,16 +34,23 @@
     "astro-component"
   ],
   "devDependencies": {
-    "astro": "^3.3.2"
-  },
-  "dependencies": {
-    "astro-auto-import": "^0.3.1",
+    "astro": "^3.3.2",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-from-markdown": "^2.0.0",
     "mdast-util-mdx": "^3.0.0",
-    "mdast-util-mdx-jsx": "^3.0.0",
     "micromark-extension-directive": "^3.0.0",
-    "micromark-extension-mdxjs": "^3.0.0",
+    "micromark-extension-mdxjs": "^3.0.0"
+  },
+  "dependencies": {
+    "astro-auto-import": "^0.3.1",
+    "mdast-util-mdx-jsx": "^3.0.0",
     "unist-util-remove": "^4.0.0"
+  },
+  "peerDependencies": {
+    "mdast-util-directive": "^3.0.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-mdx": "^3.0.0",
+    "micromark-extension-directive": "^3.0.0",
+    "micromark-extension-mdxjs": "^3.0.0"
   }
 }
