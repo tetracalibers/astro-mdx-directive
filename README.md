@@ -39,7 +39,7 @@ const directives = {
       path: 'src/components/english/Word.astro',
       useAsProps: {
         directiveLabel: (text) => {
-          const [en, ja] = content.split("|")
+          const [en, ja] = text.split("|")
           return { en, ja }
         }
       }
