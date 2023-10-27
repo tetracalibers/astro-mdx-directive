@@ -1,0 +1,49 @@
+{
+  "name": "astro-mdx-directive",
+  "description": "Astro Integration for MDX-enhanced directive notation",
+  "version": "0.0.1",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "author": {
+    "name": "tomixy",
+    "url": "https://tetracalibers.github.io/tomixyz-biography/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetracalibers/astro-mdx-directive.git"
+  },
+  "bugs": "https://github.com/tetracalibers/astro-mdx-directive/issues",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "astro-integration",
+    "remark-plugin",
+    "astro",
+    "markdown",
+    "mdx",
+    "astro-component"
+  ],
+  "devDependencies": {
+    "astro": "^3.3.2"
+  },
+  "dependencies": {
+    "astro-auto-import": "^0.3.1",
+    "mdast-util-directive": "^3.0.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-mdx": "^3.0.0",
+    "mdast-util-mdx-jsx": "^3.0.0",
+    "micromark-extension-directive": "^3.0.0",
+    "micromark-extension-mdxjs": "^3.0.0",
+    "unist-util-remove": "^4.0.0"
+  }
+}
