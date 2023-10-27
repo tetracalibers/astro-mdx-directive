@@ -1,4 +1,4 @@
-import { DirectiveComponentList } from './config-schema'
+import { DirectiveComponentList } from './config-schema.js'
 
 export const getAutoImportedName = (name: string | string[]) => {
   const prefix = 'AutoImported__'

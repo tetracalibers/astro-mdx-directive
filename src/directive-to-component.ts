@@ -1,12 +1,12 @@
 import { h } from 'hastscript'
 import { visit } from 'unist-util-visit'
-import { makeComponentNode } from './utils/mdx'
-import { getAutoImportedName } from './auto-import'
+import { makeComponentNode } from './utils/mdx.js'
+import { getAutoImportedName } from './auto-import.js'
 import type {
   DirectiveComponent,
   DirectiveComponentList,
   DirectiveLabelPropsConf,
-} from './config-schema'
+} from './config-schema.js'
 import type { Directives } from 'mdast-util-directive'
 import { remove } from 'unist-util-remove'
 import type { Root } from 'mdast'
@@ -15,8 +15,8 @@ import {
   isDirectiveLabelNode,
   isLiteralNode,
   isDirectiveNode,
-} from './utils/is-node'
-import { removeStart } from './utils/typesafe'
+} from './utils/is-node.js'
+import { removeStart } from './utils/typesafe.js'
 
 const toPropsDirectiveLabel = (
   directiveLabelProps: DirectiveLabelPropsConf,

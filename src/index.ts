@@ -1,9 +1,9 @@
 import type { AstroIntegration } from 'astro'
 import AutoImport from 'astro-auto-import'
-import remarkMdxDirective from './lib/remark-mdx-directive'
-import { initDirectives } from './directive-to-component'
-import { getAutoImportList } from './auto-import'
-import type { DirectiveComponentList } from './config-schema'
+import remarkMdxDirective from './lib/remark-mdx-directive.js'
+import { initDirectives } from './directive-to-component.js'
+import { getAutoImportList } from './auto-import.js'
+import type { DirectiveComponentList } from './config-schema.js'
 
 interface Options {
   directives: DirectiveComponentList

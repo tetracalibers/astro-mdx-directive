@@ -1,7 +1,7 @@
 import type { Directives } from 'mdast-util-directive'
 import type { Parent, Literal } from 'mdast'
 import type { Node } from 'unist'
-import { hasOwn } from './typesafe'
+import { hasOwn } from './typesafe.js'
 
 export const isDirectiveNode = (node: Node): node is Directives => {
   return (
