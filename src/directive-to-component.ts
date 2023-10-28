@@ -24,7 +24,9 @@ const toPropsDirectiveLabel = (
   let value: string | undefined = undefined
 
   remove(node, (child) => {
-    if (!isDirectiveLabelNode(child)) return false
+    if (node.type === 'containerDirective' && !isDirectiveLabelNode(child)) {
+      return false
+    }
     if (!isParentNode(child)) return false
 
     const [firstChild] = child.children
