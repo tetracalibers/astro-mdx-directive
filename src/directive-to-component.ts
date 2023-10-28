@@ -1,4 +1,3 @@
-import { directive } from 'micromark-extension-directive'
 import { h } from 'hastscript'
 import { visit } from 'unist-util-visit'
 import { makeComponentNode } from './utils/mdx.js'
@@ -25,24 +24,17 @@ const toPropsDirectiveLabel = (
   let value: string | undefined = undefined
 
   remove(node, (child) => {
-    if (!isParentNode(child)) {
-      return false
-    }
+    if (!isDirectiveLabelNode(child)) return false
+    if (!isParentNode(child)) return false
 
-    const { children } = child
+    const [firstChild] = child.children
+    if (!isLiteralNode(firstChild)) return false
 
-    if (children.length > 0) {
-      const directiveLabelNode = children.find(isDirectiveLabelNode)
-      if (directiveLabelNode && isLiteralNode(directiveLabelNode)) {
-        value = directiveLabelNode.value
-        return true
-      }
-    }
-
-    return false
+    value = firstChild.value
+    return true
   })
 
-  if (!value) {
+  if (value === undefined) {
     return {}
   }
 
