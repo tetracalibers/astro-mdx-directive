@@ -15,7 +15,7 @@ import {
   isLiteralNode,
   isDirectiveNode,
 } from './utils/is-node.js'
-import { trimWord } from './utils/typesafe.js'
+import { hasOwn, trimWord } from './utils/typesafe.js'
 
 const toPropsDirectiveLabel = (
   directiveLabelProps: DirectiveLabelPropsConf,
