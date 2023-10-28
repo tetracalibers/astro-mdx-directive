@@ -83,10 +83,14 @@ const parseUseAsProps = (
     }
   }
 
-  if ('tagName' in useAsProps) {
-    props = {
-      ...props,
-      [useAsProps.tagName]: node.name,
+  if (hasOwn(useAsProps, 'tagName')) {
+    const { tagName } = useAsProps
+
+    if (typeof tagName === 'string') {
+      props = {
+        ...props,
+        [tagName]: node.name,
+      }
     }
   }
 
