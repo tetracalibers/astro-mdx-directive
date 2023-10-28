@@ -16,6 +16,7 @@ import {
   isDirectiveNode,
 } from './utils/is-node.js'
 import { hasOwn, trimWord } from './utils/typesafe.js'
+import type { Node } from 'unist'
 
 const toPropsDirectiveLabel = (
   directiveLabelProps: DirectiveLabelPropsConf,
@@ -24,15 +25,19 @@ const toPropsDirectiveLabel = (
   let value: string | undefined = undefined
 
   remove(node, (child) => {
-    if (node.type === 'containerDirective' && !isDirectiveLabelNode(child)) {
-      return false
+    let directiveLabelNode = child
+
+    if (node.type === 'containerDirective') {
+      if (!isDirectiveLabelNode(child)) return false
+      if (!isParentNode(child)) return false
+
+      const [firstChild] = child.children
+      directiveLabelNode = firstChild
     }
-    if (!isParentNode(child)) return false
 
-    const [firstChild] = child.children
-    if (!isLiteralNode(firstChild)) return false
+    if (!isLiteralNode(directiveLabelNode)) return false
 
-    value = firstChild.value
+    value = directiveLabelNode.value
     return true
   })
 
