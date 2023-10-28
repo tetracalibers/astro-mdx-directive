@@ -16,7 +16,6 @@ import {
   isDirectiveNode,
 } from './utils/is-node.js'
 import { hasOwn, trimWord } from './utils/typesafe.js'
-import type { Node } from 'unist'
 
 const toPropsDirectiveLabel = (
   directiveLabelProps: DirectiveLabelPropsConf,
