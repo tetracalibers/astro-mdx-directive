@@ -45,7 +45,7 @@ const directives = {
   text: [
     {
       name: 'Inline',
-      path: "src/components/Inline.astro"
+      path: "src/components/inline.astro"
     }
   ]
 };
