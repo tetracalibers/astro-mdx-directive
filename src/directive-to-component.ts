@@ -15,7 +15,7 @@ import {
   isLiteralNode,
   isDirectiveNode,
 } from './utils/is-node.js'
-import { removeStart } from './utils/typesafe.js'
+import { trimWord } from './utils/typesafe.js'
 
 const toPropsDirectiveLabel = (
   directiveLabelProps: DirectiveLabelPropsConf,
@@ -108,7 +108,7 @@ export const initDirectives = ({ directives, importedNameMap }: InitConfig) => {
 
         const node: Directives = _node
 
-        const directiveType = removeStart(node.type, 'Directive')
+        const directiveType = trimWord(node.type, 'Directive')
 
         const thisDirectiveComponents = directives[directiveType]
         if (!thisDirectiveComponents) return

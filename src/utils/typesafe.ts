@@ -7,14 +7,11 @@ type Split<S extends string, SEP extends string> = string extends S
   ? []
   : [S]
 
-export const removeStart = <SOURCE extends string, TARGET extends string>(
+export const trimWord = <SOURCE extends string, TARGET extends string>(
   source: SOURCE,
   target: TARGET
 ): Split<SOURCE, TARGET>[0] => {
-  if (source.startsWith(target)) {
-    return source.slice(target.length)
-  }
-  return source
+  return source.replace(target, '')
 }
 
 export const hasOwn = <OBJECT extends object, PROPERTY_NAME extends string>(
