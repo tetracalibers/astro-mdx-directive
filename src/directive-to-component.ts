@@ -113,8 +113,8 @@ export const initDirectives = ({ directives, importedNameMap }: InitConfig) => {
         const thisDirectiveComponents = directives[directiveType]
         if (!thisDirectiveComponents) return
 
-        const component = thisDirectiveComponents.find(
-          ({ name }) => name === node.name
+        const component = thisDirectiveComponents.find(({ name }) =>
+          [name].flat().includes(node.name)
         )
 
         if (component) {
